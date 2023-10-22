@@ -6,6 +6,7 @@
 #include <fstream>
 #include <sstream>
 #include <iostream>
+#include <glm/glm.hpp>
 
 class Shader{
 public:
@@ -16,6 +17,7 @@ public:
     void setBool(const std::string &name, bool value) const;
     void setInt(const std::string &name, int value) const;
     void setFloat(const std::string &name, float value) const;
+    void setMatrix4(const std::string &name, const glm::mat4 &mat) const;
 private:
     void checkCompileErrors(unsigned int shader, std::string type);
 };
