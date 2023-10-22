@@ -106,6 +106,22 @@ int main() {
     glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float ), (void*)(3 * sizeof(float)));
     glEnableVertexAttribArray(1);
 
+
+    /* Camera stuff here */
+    glm::vec3 cameraPos = glm::vec3(0.0f, 0.0f, 3.0f); 
+    glm::vec3 cameraTarget = glm::vec3(0.0f, 0.0f, 0.0f);
+    glm::vec3 cameraDirection = glm::normalize(cameraPos - cameraTarget);
+    
+
+    /* Right Axis */
+
+    glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f);
+    glm::vec3 cameraRight = glm::normalize(glm::cross(up, cameraDirection));
+    glm::vec3 cameraUp = glm::cross(cameraDirection, cameraRight);
+
+
+
+
     int width, height, nrChannels;
     stbi_set_flip_vertically_on_load(true);
     unsigned char *data = stbi_load("assets/textures/wall.jpg", &width, &height, &nrChannels, 0);
@@ -159,6 +175,7 @@ int main() {
             glm::vec3( 1.5f,  0.2f, -1.5f),
             glm::vec3(-1.3f,  1.0f, 5.5f)
     };
+
 
     while(!glfwWindowShouldClose(window)){
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);

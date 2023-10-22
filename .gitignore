@@ -1,6 +1,8 @@
 cmake-build-debug/
 # Prerequisites
 *.d
+build/
+.cmake/
 
 # Compiled Object files
 *.slo
