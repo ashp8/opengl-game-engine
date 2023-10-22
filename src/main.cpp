@@ -179,10 +179,9 @@ int main() {
     shader.setInt("texture1", 0);
     shader.setInt("texture2", 1);
 
-    glm::mat4 projection;
-    projection = glm::perspective(glm::radians(45.0f), (float)width / (float)height, 0.1f, 100.0f);
+    glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)WIDTH / (float)HEIGHT, 0.1f, 100.f);
+    shader.setMatrix4("projection", projection);
     glm::mat4 view = glm::mat4(1.0f);
-
 
     int modelLoc = glGetUniformLocation(shader.ID, "model");
     int viewLoc = glGetUniformLocation(shader.ID, "view");
@@ -209,6 +208,7 @@ int main() {
     glBindTexture(GL_TEXTURE_2D, texture2);
 
 
+
     while(!glfwWindowShouldClose(window)){
 
         float currentFrame = static_cast<float>(glfwGetTime());
@@ -220,10 +220,6 @@ int main() {
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        projection = glm::perspective(glm::radians(camera.Zoom), (float)WIDTH / (float)HEIGHT, 0.1f, 100.f);
-        shader.setMatrix4("projection", projection);
-
-        
         view  = camera.GetViewMatrix();
         shader.setMatrix4("view", view);
 
